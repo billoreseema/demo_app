@@ -1,0 +1,61 @@
+version: 2.1
+jobs:
+        unit_test:
+                docker:
+                - image: busybox:latest
+                steps:
+                - run:
+                        name: Unit Test
+                        command: echo "Going to run Unit Test"
+        linting:
+                docker:
+                - image: busybox:latest
+                steps:
+                - run:
+                        name: Lint Test
+                        command: echo "Going to run Lint Test"
+        build_artifact:
+                docker:
+                - image: busybox:latest
+                steps:
+                - run:
+                        name: Build Artifact
+                        command: echo "Going to run the build artifact"
+
+        deploy_to_dev:
+                docker:
+                - image: busybox:latest
+                steps:
+                - run:
+                        name: Deploy to Dev
+                        command: echo "Going to deploy to dev"
+        deploy_to_qa:
+                docker:
+                - image: busybox:latest
+                steps:
+                - run:
+                        name: Deploy to QA
+                        command: echo "Going to deploy to QA"
+                - run:
+                        name: Step no 2
+                        command: echo "Going to deploy to QA again"
+workflows:
+        version: 2
+        sample_pipeline:
+                jobs:
+                        - linting
+                        - unit_test
+                        - build_artifact:
+                                requires:
+                                - unit_test
+                                - linting
+                        - deploy_to_dev:
+                                requires:
+                                - build_artifact
+                        - hold_for_approval:
+                                type: approval
+                                requires:
+                                - deploy_to_dev
+                        - deploy_to_qa:
+                                requires:
+                                - hold_for_approval
