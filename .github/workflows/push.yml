@@ -5,7 +5,7 @@ env:
   
   CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
   CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
-  NAMESPACE: chaos-test
+  NAMESPACE: chaos-testing
   SECRET: azuresecret
   APP_NAME: chaos-mesh
   
