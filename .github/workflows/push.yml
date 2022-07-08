@@ -1,19 +1,36 @@
-name: docker-compose-actions-workflow
-on:
-  push:
-    branches:
-      - 'master'
-    paths-ignore:
-      - 'DCOS/**'
-      - 'K8s/**'
-      - 'load-gen/**'
-      - 'OpenShift/**'
-      - 'Swarm/**'
+on: [push]
 
+# Environment variables available to all jobs and steps in this workflow
+env:
+  
+  CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
+  CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
+  NAMESPACE: chaos-test
+  SECRET: azuresecret
+  APP_NAME: chaos-mesh
+  
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build the stack
-        run: docker-compose build
+    - uses: actions/checkout@main
+    
+    # Set the target Azure Kubernetes Service (AKS) cluster. 
+    - uses: azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+    
+    # Create namespace if doesn't exist
+    - run: |
+        kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
+    
+    # Deploy app to AKS using helm
+    - uses: azure/setup-helm@v3
+      with:
+        version: 'v3.5.4' # default is latest stable
+      id: install
+    - run: |
+        helm repo add chaos-mesh https://charts.chaos-mesh.org
+        helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version 2.2.2
