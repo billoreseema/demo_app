@@ -73,7 +73,7 @@ The manifests for robotshop are in the *DCOS/* directory. These manifests were b
 
 You may install Instana via the DCOS package manager, instructions are here: https://github.com/dcos/examples/tree/master/instana-agent/1.9
 
-## Kubernetes
+## K8s
 You can run Kubernetes locally using [minikube](https://github.com/kubernetes/minikube) or on one of the many cloud providers.
 
 The Docker container images are all available on [Docker Hub](https://hub.docker.com/u/robotshop/).
