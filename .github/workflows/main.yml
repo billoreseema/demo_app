@@ -15,8 +15,6 @@ jobs:
   deploy:
     name: Automatic Deploy    
     uses: ./.github/workflows/app.yml
-    with:
-      base-yaml: ./K8s/helm/values.yaml
       
   Inject:
       name: Deploy Sample app
