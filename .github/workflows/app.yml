@@ -34,7 +34,9 @@ jobs:
         name: install_helm
         with:
           version: 'v3.5.4' # default is latest stable
+          
       - id: install
+        name: Helm install
       - run: |
           helm repo add cloud-native-toolkit https://charts.cloudnativetoolkit.dev
           helm upgrade robot-shop --namespace ${NAMESPACE} ./K8s/helm/values.yaml
