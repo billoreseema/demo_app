@@ -1,14 +1,19 @@
 name: Chaos
 
-on: [workflow_call]
+on: 
+  workflow_call:
 
-env:
+    inputs:
 
-  CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
-  CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
-  NAMESPACE: robot-shop
-  SECRET: azuresecret
-  APP_NAME: robot-shop
+      CLUSTER_NAME:
+        required: true
+        type: string
+      CLUSTER_RESOURCE_GROUP: 
+        required: true
+        type: string
+      NAMESPACE:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -20,8 +25,8 @@ jobs:
       uses: azure/aks-set-context@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
-        cluster-name: ${{ env.CLUSTER_NAME }}
-        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+        cluster-name: ${{ inputs.CLUSTER_NAME }}
+        resource-group: ${{ inputs.CLUSTER_RESOURCE_GROUP }}
       
     - id: print_cluster_info
       name: Print cluster information
