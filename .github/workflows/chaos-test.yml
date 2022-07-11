@@ -1,6 +1,6 @@
 name: Chaos
 
-on: [ workflow_dispatch]
+on: [workflow_call]
 
 env:
 
