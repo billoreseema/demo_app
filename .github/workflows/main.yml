@@ -19,14 +19,14 @@ jobs:
     
       - id: Deploy_App
         name: Deploy Sample application 
-        uses: ./.github/actions/app
+        uses: ./.github/app
         with:
           base-yaml: ./helm/values.yaml
     
       - id: Inject_ChaosTest
         name: Deploy Sample application 
-        uses: ./.github/actions/chaos-test
+        uses: ./.github/chaos-test
 
       - id: PerfTest
         name: Deploy Sample application 
-        uses: ./.github/actions/perf
+        uses: ./.github/perf
