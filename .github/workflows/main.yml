@@ -11,26 +11,17 @@ env:
   APP_NAME: robot-shop
 
 jobs:
-  deploy:
-    name: Automatic Deploy
-    runs-on: ubuntu-latest
-    
-    steps:
-      
-      - id: repo_checkout
-        name: Checkout
-        uses: actions/checkout@v2
-    
-      - id: Deploy_App
-        name: Deploy Sample application 
-        uses: ./.github/workflows/app.yml@main
-        with:
-          base-yaml: ./K8s/helm/values.yaml
-    
-      - id: Inject_ChaosTest
-        name: Deploy Sample application 
-        uses: ./.github/workflows/chaos-test.yml@main
 
-      - id: PerfTest
-        name: Deploy Sample application 
-        uses: ./.github/workflows/perf.yml@main
+  deploy:
+    name: Automatic Deploy    
+    uses: ./.github/workflows/app.yml
+    with:
+      base-yaml: ./K8s/helm/values.yaml
+      
+  Inject:
+      name: Deploy Sample app
+      uses: ./.github/workflows/chaos-test.yml
+
+  PerfTest:
+      name: Run Perf application 
+      uses: ./.github/workflows/perf.yml
