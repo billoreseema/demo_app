@@ -1,0 +1,58 @@
+name: Automatically deploy a set of artifacts from another actions
+
+on: [push]
+
+env:
+
+  CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
+  CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
+  NAMESPACE: robot-shop
+  SECRET: azuresecret
+  APP_NAME: robot-shop
+
+jobs:
+
+  deploy:
+    name: DeployRobotshop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+    
+      # Set the target Azure Kubernetes Service (AKS) cluster. 
+      - id: setup_cluster_credentials
+      - uses: azure/aks-set-context@v1
+        with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+      # Create namespace if doesn't exist
+      - run: |
+          kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -    
+    
+      - id: install_helm
+      # Deploy app to AKS using helm
+      - uses: azure/setup-helm@v3
+        with:
+        version: 'v3.5.4' # default is latest stable
+      - id: install
+      - run: |
+          helm repo add cloud-native-toolkit https://charts.cloudnativetoolkit.dev
+          helm upgrade robot-shop --namespace ${NAMESPACE} ./K8s/helm/values.yaml
+      
+      - id: helm_test
+        name: Helm Test
+        run: |
+          helm test robot-shop --namespace ${NAMESPACE} --timeout 15m0s --logs
+        continue-on-error: true
+      
+      - id: helm_rollback
+        name: Helm Rollback
+        if: steps.helm_test.outcome == 'failure'
+        run: |
+          echo "Rollback to previous version due to acceptance test cases issue"
+          helm rollback ${CHART_NAME}-v1-${ENVIRONMENT} --namespace ${GKE_NAMESPACE} --timeout 15m
+          kubectl rollout status Deployment/${CHART_NAME}-v1 --namespace=${GKE_NAMESPACE} --watch=true
+          echo "===================================================================================================="
+          echo "Rollback to previous version due to acceptance test cases issue so check the logs at HELM TEST STEP"
+          echo "===================================================================================================="
+          exit 1
