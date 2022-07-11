@@ -1,7 +1,11 @@
 name: Automatically deploy a set of artifacts from another actions
 
-on: [push]
-
+on: 
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Do you want to deploy/Upgrade'
+        required: true
 env:
 
   CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
@@ -21,10 +25,11 @@ jobs:
       # Set the target Azure Kubernetes Service (AKS) cluster. 
       - id: setup_cluster_credentials
       - uses: azure/aks-set-context@v1
+        name: setupcluster
         with:
-        creds: '${{ secrets.AZURE_CREDENTIALS }}'
-        cluster-name: ${{ env.CLUSTER_NAME }}
-        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
       # Create namespace if doesn't exist
       - run: |
           kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -    
@@ -32,8 +37,9 @@ jobs:
       - id: install_helm
       # Deploy app to AKS using helm
       - uses: azure/setup-helm@v3
+        name: install_helm
         with:
-        version: 'v3.5.4' # default is latest stable
+          version: 'v3.5.4' # default is latest stable
       - id: install
       - run: |
           helm repo add cloud-native-toolkit https://charts.cloudnativetoolkit.dev
