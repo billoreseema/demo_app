@@ -14,8 +14,9 @@ on:
       NAMESPACE:
         required: true
         type: string
-env:
-  AZ_SECRET: ${{ secrets.AZURE_CREDENTIALS }}
+      AZ_CRED:
+        required: true
+        type: string
 
 jobs:
 
@@ -28,7 +29,7 @@ jobs:
         uses: azure/aks-set-context@v1
         name: setupcluster
         with:
-          creds: ${{ env.AZ_SECRET }}
+          creds: ${{ inputs.AZ_CRED }}
           cluster-name: ${{ inputs.CLUSTER_NAME }}
           resource-group: ${{ inputs.CLUSTER_RESOURCE_GROUP }}
           
