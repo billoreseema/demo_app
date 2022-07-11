@@ -15,11 +15,18 @@ jobs:
   deploy:
     name: Automatic Deploy    
     uses: ./.github/workflows/app.yml
+    with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
       
   Inject:
       name: Deploy Sample app
       uses: ./.github/workflows/chaos-test.yml
-
+      with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
   PerfTest:
       name: Run Perf application 
       uses: ./.github/workflows/perf.yml
