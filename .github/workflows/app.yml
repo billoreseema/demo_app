@@ -24,7 +24,10 @@ jobs:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: ${{ env.CLUSTER_NAME }}
           resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+          
       # Create namespace if doesn't exist
+      - id: create_namespace
+        name: createnamespace
         run: |
           kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -    
     
