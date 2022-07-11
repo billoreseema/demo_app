@@ -13,7 +13,7 @@ env:
 jobs:
 
   deploy:
-    name: Automatic Deploy    
+    name: Upgrade sample app    
     uses: ./.github/workflows/app.yml
     with:
           
@@ -24,7 +24,7 @@ jobs:
           AZ_CRED: ${{ secrets.AZURE_CREDENTIALS }}  
 
   Inject:        
-      name: Deploy Sample app
+      name: Inject Chaos test
       uses: ./.github/workflows/chaos-test.yml
       needs: deploy
       with:
@@ -35,6 +35,6 @@ jobs:
       secrets:
           AZ_CRED: ${{ secrets.AZURE_CREDENTIALS }}
   PerfTest:
-      name: Run Perf application
+      name: Run Perf test
       needs: Inject
       uses: ./.github/workflows/perf.yml
