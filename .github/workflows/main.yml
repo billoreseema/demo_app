@@ -16,20 +16,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      
       - id: repo_checkout
         name: Checkout
         uses: actions/checkout@v2
     
       - id: Deploy_App
         name: Deploy Sample application 
-        uses: ./.github/workflows/app.yml
+        uses: ./.github/workflows/app.yml@main
         with:
           base-yaml: ./K8s/helm/values.yaml
     
       - id: Inject_ChaosTest
         name: Deploy Sample application 
-        uses: ./.github/workflows/chaos-test.yml
+        uses: ./.github/workflows/chaos-test.yml@main
 
       - id: PerfTest
         name: Deploy Sample application 
-        uses: ./.github/workflows/perf.yml
+        uses: ./.github/workflows/perf.yml@main
