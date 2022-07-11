@@ -21,7 +21,7 @@ jobs:
           CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
           CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
           NAMESPACE: robot-shop
-          AZ_CRED: ${{ secrets.AZURE_CREDENTIALS }}
+          AZ_CRED: ${{ env.SECRET }}
       
   Inject:
       name: Deploy Sample app
