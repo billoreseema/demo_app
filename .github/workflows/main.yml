@@ -1,0 +1,32 @@
+name: Deploy robotshop, inject chaos experiment and load test
+
+on: [ workflow_dispatch]
+
+env:
+  
+  CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
+  CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
+  NAMESPACE: robot-shop
+  SECRET: azuresecret
+  APP_NAME: robot-shop
+
+jobs:
+  deploy:
+    name: Automatic Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      - id: Deploy_App
+        name: Deploy Sample application 
+        uses: ./.github/actions/app
+        with:
+          base-yaml: ./helm/values.yaml
+    
+      - id: Inject_ChaosTest
+        name: Deploy Sample application 
+        uses: ./.github/actions/chaos-test
+
+      - id: PerfTest
+        name: Deploy Sample application 
+        uses: ./.github/actions/perf
