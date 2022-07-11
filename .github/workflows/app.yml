@@ -1,7 +1,7 @@
 name: Automatically deploy a set of artifacts from another actions
 
 on: 
-  [workflow_dispatch]
+  [workflow_call]
 env:
 
   CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
