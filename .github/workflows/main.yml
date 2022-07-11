@@ -16,12 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - id: repo_checkout
+        name: Checkout
+        uses: actions/checkout@v2
     
       - id: Deploy_App
         name: Deploy Sample application 
         uses: ./.github/app
         with:
-          base-yaml: ./helm/values.yaml
+          base-yaml: ./K8s/helm/values.yaml
     
       - id: Inject_ChaosTest
         name: Deploy Sample application 
