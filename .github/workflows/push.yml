@@ -1,5 +1,10 @@
-on: [push]
-
+on: 
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'confirmatio'
+        required: true
+        
 # Environment variables available to all jobs and steps in this workflow
 env:
   
