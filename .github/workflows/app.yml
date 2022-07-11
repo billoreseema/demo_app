@@ -16,8 +16,6 @@ jobs:
     name: DeployRobotshop
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-    
       # Set the target Azure Kubernetes Service (AKS) cluster. 
       - id: setup_cluster_credentials
       - uses: azure/aks-set-context@v1
