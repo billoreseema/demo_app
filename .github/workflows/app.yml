@@ -1,11 +1,7 @@
 name: Automatically deploy a set of artifacts from another actions
 
 on: 
-  workflow_dispatch:
-    inputs:
-      confirm:
-        description: 'Do you want to deploy/Upgrade'
-        required: true
+  [workflow_dispatch]
 env:
 
   CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
