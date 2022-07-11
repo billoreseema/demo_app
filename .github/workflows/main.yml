@@ -16,15 +16,15 @@ jobs:
     name: Automatic Deploy    
     uses: ./.github/workflows/app.yml
     with:
-          SECRET: '${{ secrets.AZURE_CREDENTIALS }}'
-          CLUSTER_NAME: '${{ env.CLUSTER_NAME }}'
-          CLUSTER_RESOURCE_GROUP: '${{ env.CLUSTER_RESOURCE_GROUP }}'
+          SECRET: ${{ secrets.AZURE_CREDENTIALS }}
+          CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
+          CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
       
   Inject:
       name: Deploy Sample app
       uses: ./.github/workflows/chaos-test.yml
       with:
-          SECRET: '${{ secrets.AZURE_CREDENTIALS }}'
+          SECRET: ${{ secrets.AZURE_CREDENTIALS }}
           CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
           CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
           
