@@ -15,6 +15,11 @@ on:
         required: true
         type: string
 
+    secrets:
+      AZ_CRED:
+        required: true
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,7 +29,7 @@ jobs:
       name: setup_cluster_credentials 
       uses: azure/aks-set-context@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZ_CRED }}
         cluster-name: ${{ inputs.CLUSTER_NAME }}
         resource-group: ${{ inputs.CLUSTER_RESOURCE_GROUP }}
       
