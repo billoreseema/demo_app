@@ -1,14 +1,22 @@
 name: Automatically deploy a set of artifacts from another actions
 
 on: 
-  [workflow_call]
-env:
+  workflow_call:
 
-  CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
-  CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
-  NAMESPACE: robot-shop
-  SECRET: azuresecret
-  APP_NAME: robot-shop
+    inputs:
+
+      CLUSTER_NAME:
+        required: true
+        type: string
+      CLUSTER_RESOURCE_GROUP: 
+        required: true
+        type: string
+      NAMESPACE:
+        required: true
+        type: string
+      SECRET:
+        required: true
+        type: string
 
 jobs:
 
@@ -22,14 +30,14 @@ jobs:
         name: setupcluster
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
-          cluster-name: ${{ env.CLUSTER_NAME }}
-          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+          cluster-name: ${{ inputs.CLUSTER_NAME }}
+          resource-group: ${{ inputs.CLUSTER_RESOURCE_GROUP }}
           
       # Create namespace if doesn't exist
       - id: create_namespace
         name: createnamespace
         run: |
-          kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -    
+          kubectl create namespace ${{ inputs.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -    
     
       - id: install_helm
       # Deploy app to AKS using helm
