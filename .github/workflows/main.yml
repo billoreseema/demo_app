@@ -30,7 +30,9 @@ jobs:
           
           CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
           CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
-          NAMESPACE: robot-shop          
+          NAMESPACE: robot-shop
+      secrets:
+          AZ_CRED: ${{ secrets.AZURE_CREDENTIALS }}
   PerfTest:
       name: Run Perf application 
       uses: ./.github/workflows/perf.yml
