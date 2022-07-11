@@ -18,26 +18,26 @@ jobs:
     steps:
       # Set the target Azure Kubernetes Service (AKS) cluster. 
       - id: setup_cluster_credentials
-      - uses: azure/aks-set-context@v1
+        uses: azure/aks-set-context@v1
         name: setupcluster
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: ${{ env.CLUSTER_NAME }}
           resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
       # Create namespace if doesn't exist
-      - run: |
+        run: |
           kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -    
     
       - id: install_helm
       # Deploy app to AKS using helm
-      - uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v3
         name: install_helm
         with:
           version: 'v3.5.4' # default is latest stable
           
       - id: install
         name: Helm install
-      - run: |
+        run: |
           helm repo add cloud-native-toolkit https://charts.cloudnativetoolkit.dev
           helm upgrade robot-shop --namespace ${NAMESPACE} ./K8s/helm/values.yaml
       
