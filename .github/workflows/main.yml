@@ -22,14 +22,14 @@ jobs:
     
       - id: Deploy_App
         name: Deploy Sample application 
-        uses: ./.github/app
+        uses: ./.github/workflows/app
         with:
           base-yaml: ./K8s/helm/values.yaml
     
       - id: Inject_ChaosTest
         name: Deploy Sample application 
-        uses: ./.github/chaos-test
+        uses: ./.github/workflows/chaos-test
 
       - id: PerfTest
         name: Deploy Sample application 
-        uses: ./.github/perf
+        uses: ./.github/workflows/perf
