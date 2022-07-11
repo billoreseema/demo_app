@@ -1,4 +1,4 @@
-name: Deploy robotshop, inject chaos experiment and load test
+name: main_workflow
 
 on: [ workflow_dispatch]
 
