@@ -1,4 +1,16 @@
-on: [workflow_call]
+name: Performance Test
+
+on: 
+  [workflow_call]
+
+env:
+
+  CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
+  CLUSTER_RESOURCE_GROUP: DEMO-DEMO-SUA01-PROD-RG
+  NAMESPACE: robot-shop
+  SECRET: azuresecret
+  APP_NAME: robot-shop
+
 jobs:
   jmeter_job:
     runs-on: ubuntu-latest
