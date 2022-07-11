@@ -26,6 +26,7 @@ jobs:
   Inject:        
       name: Deploy Sample app
       uses: ./.github/workflows/chaos-test.yml
+      needs: deploy
       with:
           
           CLUSTER_NAME: DEMO-DEMO-SUA01-PROD-AKS
@@ -34,5 +35,6 @@ jobs:
       secrets:
           AZ_CRED: ${{ secrets.AZURE_CREDENTIALS }}
   PerfTest:
-      name: Run Perf application 
+      name: Run Perf application
+      needs: Inject
       uses: ./.github/workflows/perf.yml
