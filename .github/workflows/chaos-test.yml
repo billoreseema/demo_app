@@ -49,5 +49,5 @@ jobs:
       uses: chaos-mesh/chaos-mesh-action@master
       env:
         CFG_BASE64: a2luZDogTmV0d29ya0NoYW9zCmFwaVZlcnNpb246IGNoYW9zLW1lc2gub3JnL3YxYWxwaGExCm1ldGFkYXRhOgogIG5hbWVzcGFjZTogcm9ib3Qtc2hvcAogIG5hbWU6IG5ldHdvcmstcm9ib3QKc3BlYzoKICBzZWxlY3RvcjoKICAgIG5hbWVzcGFjZXM6CiAgICAgIC0gcm9ib3Qtc2hvcAogIG1vZGU6IGFsbAogIGFjdGlvbjogZGVsYXkKICBkdXJhdGlvbjogNW0KICBkZWxheToKICAgIGxhdGVuY3k6IDEwcwogICAgY29ycmVsYXRpb246ICcwJwogICAgaml0dGVyOiAxMHMKICBkaXJlY3Rpb246IGJvdGgKICB0YXJnZXQ6CiAgICBzZWxlY3RvcjoKICAgICAgbmFtZXNwYWNlczoKICAgICAgICAtIHJvYm90LXNob3AKICAgIG1vZGU6IGFsbA==
-        CHAOS_MESH_VERSION: v1.0.0
+        CHAOS_MESH_VERSION: v2.2.0
         CFG_FILE: https://raw.githubusercontent.com/chaos-mesh/chaos-mesh-action/master/chaos-test.yaml
