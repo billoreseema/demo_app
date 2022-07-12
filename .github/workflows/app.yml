@@ -58,15 +58,3 @@ jobs:
         run: |
           helm test robot-shop --namespace ${NAMESPACE} --timeout 15m0s --logs
         continue-on-error: true
-      
-      - id: helm_rollback
-        name: Helm Rollback
-        if: steps.helm_test.outcome == 'failure'
-        run: |
-          echo "Rollback to previous version due to acceptance test cases issue"
-          helm rollback ${CHART_NAME}-v1-${ENVIRONMENT} --namespace ${GKE_NAMESPACE} --timeout 15m
-          kubectl rollout status Deployment/${CHART_NAME}-v1 --namespace=${GKE_NAMESPACE} --watch=true
-          echo "===================================================================================================="
-          echo "Rollback to previous version due to acceptance test cases issue so check the logs at HELM TEST STEP"
-          echo "===================================================================================================="
-          exit 1
