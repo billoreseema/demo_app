@@ -51,7 +51,7 @@ jobs:
         name: Helm install
         run: |
           helm repo add cloud-native-toolkit https://charts.cloudnativetoolkit.dev
-          helm upgrade robot-shop --namespace ${NAMESPACE} --values https://github.com/billoreseema/demo_app/blob/ef97648c978ae53e1e82670ad10b5a8dd29dcc59/K8s/helm/values.yaml ./K8s/helm/  
+          # helm upgrade robot-shop --namespace ${NAMESPACE} --values https://github.com/billoreseema/demo_app/blob/ef97648c978ae53e1e82670ad10b5a8dd29dcc59/K8s/helm/values.yaml ./K8s/helm/  
       
       - id: helm_test
         name: Helm Test
