@@ -16,17 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     name: JMeter Test Execution
     steps:      
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         
       - name: Run JMeter Tests
-        uses: ./
+        uses: rbhadti94/apache-jmeter-action@v0.5.0
         with:
-          test-plan-path: ./robotshop.jmx
+          testFilePath: ./robotshop.jmx
+          outputReportsFolder: ./
           args: ""
           
       - name: Upload Results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v1
         with:
           name: jmeter-results
-          path: result.jtl
+          path: ./
