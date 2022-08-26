@@ -1,0 +1,45 @@
+Count,Message,Traceback,Nodes
+43,Expecting value: line 1 column 1 (char 0),"  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 345, in run
+    self.execute_next_task()
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 370, in execute_next_task
+    self.execute_task(self._task_queue.pop(0))
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 491, in execute_task
+    task(self.user)
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/robot-shop.py"", line 78, in load
+    city = choice(self.client.get('/api/shipping/cities/{}'.format(code['code']), headers={'x-forwarded-for': fake_ip}).json())
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/requests/models.py"", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+",local
+186,Expecting value: line 1 column 1 (char 0),"  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 345, in run
+    self.execute_next_task()
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 370, in execute_next_task
+    self.execute_task(self._task_queue.pop(0))
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 491, in execute_task
+    task(self.user)
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/robot-shop.py"", line 77, in load
+    code = choice(self.client.get('/api/shipping/codes', headers={'x-forwarded-for': fake_ip}).json())
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/requests/models.py"", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+",local
+2,Expecting value: line 1 column 1 (char 0),"  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 345, in run
+    self.execute_next_task()
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 370, in execute_next_task
+    self.execute_task(self._task_queue.pop(0))
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 491, in execute_task
+    task(self.user)
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/robot-shop.py"", line 84, in load
+    cart = self.client.post('/api/shipping/confirm/{}'.format(uniqueid), json=shipping, headers={'x-forwarded-for': fake_ip}).json()
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/requests/models.py"", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+",local
+8,Expecting value: line 1 column 1 (char 0),"  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 345, in run
+    self.execute_next_task()
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 370, in execute_next_task
+    self.execute_task(self._task_queue.pop(0))
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/locust/user/task.py"", line 491, in execute_task
+    task(self.user)
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/robot-shop.py"", line 80, in load
+    shipping = self.client.get('/api/shipping/calc/{}'.format(city['uuid']), headers={'x-forwarded-for': fake_ip}).json()
+  File ""/Users/kb185177/PycharmProjects/faultinjectionanalysis/venv/lib/python3.9/site-packages/requests/models.py"", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+",local
